@@ -1,0 +1,60 @@
+digraph ERD {
+    rankdir=LR;
+    graph [fontname="Helvetica", bgcolor="white", pad=0.4, nodesep=0.6, ranksep=1.0];
+    node [shape=plaintext, fontname="Helvetica"];
+    edge [fontname="Helvetica", fontsize=10, color="#555555"];
+
+    categories [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" BGCOLOR="white" COLOR="#2b6cb0">
+      <TR><TD BGCOLOR="#2b6cb0"><FONT COLOR="white"><B>categories</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">category_id  PK</TD></TR>
+      <TR><TD ALIGN="LEFT">category_name</TD></TR>
+    </TABLE>>];
+
+    products [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" BGCOLOR="white" COLOR="#2f855a">
+      <TR><TD BGCOLOR="#2f855a"><FONT COLOR="white"><B>products</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">product_id  PK</TD></TR>
+      <TR><TD ALIGN="LEFT">product_name</TD></TR>
+      <TR><TD ALIGN="LEFT">category_id  FK</TD></TR>
+      <TR><TD ALIGN="LEFT">unit_price</TD></TR>
+      <TR><TD ALIGN="LEFT">stock_quantity</TD></TR>
+    </TABLE>>];
+
+    customers [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" BGCOLOR="white" COLOR="#b7791f">
+      <TR><TD BGCOLOR="#b7791f"><FONT COLOR="white"><B>customers</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">customer_id  PK</TD></TR>
+      <TR><TD ALIGN="LEFT">first_name</TD></TR>
+      <TR><TD ALIGN="LEFT">last_name</TD></TR>
+      <TR><TD ALIGN="LEFT">email</TD></TR>
+      <TR><TD ALIGN="LEFT">city</TD></TR>
+      <TR><TD ALIGN="LEFT">state</TD></TR>
+      <TR><TD ALIGN="LEFT">country</TD></TR>
+      <TR><TD ALIGN="LEFT">signup_date</TD></TR>
+    </TABLE>>];
+
+    orders [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" BGCOLOR="white" COLOR="#b83280">
+      <TR><TD BGCOLOR="#b83280"><FONT COLOR="white"><B>orders</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">order_id  PK</TD></TR>
+      <TR><TD ALIGN="LEFT">customer_id  FK</TD></TR>
+      <TR><TD ALIGN="LEFT">order_date</TD></TR>
+      <TR><TD ALIGN="LEFT">status</TD></TR>
+    </TABLE>>];
+
+    order_items [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" BGCOLOR="white" COLOR="#c53030">
+      <TR><TD BGCOLOR="#c53030"><FONT COLOR="white"><B>order_items</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">order_item_id  PK</TD></TR>
+      <TR><TD ALIGN="LEFT">order_id  FK</TD></TR>
+      <TR><TD ALIGN="LEFT">product_id  FK</TD></TR>
+      <TR><TD ALIGN="LEFT">quantity</TD></TR>
+      <TR><TD ALIGN="LEFT">unit_price</TD></TR>
+    </TABLE>>];
+
+    categories -> products [label="1-to-many", dir=back, arrowtail=crow];
+    customers -> orders [label="1-to-many", dir=back, arrowtail=crow];
+    orders -> order_items [label="1-to-many", dir=back, arrowtail=crow];
+    products -> order_items [label="1-to-many", dir=back, arrowtail=crow];
+}
